@@ -1,0 +1,1334 @@
+<tool_code>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechFest 2025 - Evento de Palestras</title>
+  <link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swahref="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&dislay=swap" rel="stylesheet">
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #00C9A7;
+      --accent: #FF6B6B;
+      --dark: #0B0B14;
+      --dark2: #111127;
+      --dark3: #181839;
+      --text: #E0E0E0;
+      --text-light: #8888AA;
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ===== BACKGROUND EFFECTS ===== */
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow .glow-1 {
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15), transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .bg-glow .glow-2 {
+      position: absolute;
+      bottom: -200px; left: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,201,167,0.1), transparent 70%);
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(5deg); }
+    }
+
+    /* ===== PARTICLES ===== */
+    .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: var(--primary);
+      border-radius: 50%;
+      opacity: 0;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% { opacity: 0; transform: translateY(100vh) scale(0); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .navbar.scrolled {
+      background: rgba(11, 11, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.8rem 2rem;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-btn {
+      background: linear-gradient(135deg, var(--primary), #8B5CF6);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 110;
+    }
+
+    .hamburger span {
+      width: 28px; height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero-badge .dot {
+      width: 8px; height: 8px;
+      background: var(--secondary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 0.8s ease 0.1s both;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      animation: fadeInDown 0.8s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInDown 0.8s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #8B5CF6);
+      color: white;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(108,99,255,0.4);
+    }
+
+    .btn-secondary {
+      background: var(--glass);
+      color: var(--text);
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      animation: fadeInDown 0.8s ease 0.4s both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== COUNTDOWN ===== */
+    .countdown-section {
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      min-width: 130px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s;
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .countdown-item .number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .countdown-item .label {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== SECTION STYLES ===== */
+    .section {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header .tag {
+      display: inline-block;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+    }
+
+    .section-header p {
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 1rem auto 0;
+    }
+
+    /* ===== SPEAKERS ===== */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .speaker-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speaker-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(108,99,255,0.05), rgba(0,201,167,0.05));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(108,99,255,0.3);
+    }
+
+    .speaker-card:hover::before {
+      opacity: 1;
+    }
+
+    .speaker-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-card .role {
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-card .desc {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-socials a {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .speaker-socials a:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* ===== SCHEDULE ===== */
+    .schedule-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .schedule-day {
+      margin-bottom: 3rem;
+    }
+
+    .schedule-day h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .schedule-day h3 .date {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .schedule-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+    }
+
+    .schedule-item:hover {
+      background: rgba(108,99,255,0.08);
+      border-color: rgba(108,99,255,0.2);
+      transform: translateX(5px);
+    }
+
+    .schedule-time {
+      min-width: 80px;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .schedule-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .schedule-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .schedule-tag {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .tag-tech {
+      background: rgba(108,99,255,0.2);
+      color: var(--primary);
+    }
+
+    .tag-workshop {
+      background: rgba(0,201,167,0.2);
+      color: var(--secondary);
+    }
+
+    .tag-painel {
+      background: rgba(255,107,107,0.2);
+      color: var(--accent);
+    }
+
+    /* ===== TOPICS ===== */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .topic-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s;
+      cursor: default;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(108,99,255,0.3);
+    }
+
+    .topic-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .topic-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .topic-card p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* ===== LOCATION ===== */
+    .location-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .location-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .location-info p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .location-details {
+      list-style: none;
+    }
+
+    .location-details li {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .location-details li i {
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .location-map {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .location-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+    }
+
+    .map-placeholder {
+      text-align: center;
+    }
+
+    .map-placeholder i {
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,201,167,0.1));
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 30px;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15), transparent);
+      border-radius: 50%;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .cta-card p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .cta-card .btn-primary {
+      position: relative;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--glass-border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social a {
+      width: 40px; height: 40px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(11,11,20,0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 5rem 2rem;
+        transition: right 0.4s;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .location-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .countdown {
+        gap: 1rem;
+      }
+
+      .countdown-item {
+        min-width: 100px;
+        padding: 1.5rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-glow">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="particles" id="particles"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">TechFest 2025</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#speakers">Palestrantes</a></li>
+      <li><a href="#schedule">Cronograma</a></li>
+      <li><a href="#topics">Temas</a></li>
+      <li><a href="#location">Local</a></li>
+      <li><a href="#cta" class="nav-btn">Inscreva-se</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        15 a 17 de Outubro, 2025
+      </div>
+      <h1>O Maior Evento de <span class="highlight">Palestras</span> da sua Universidade</h1>
+      <p>Três dias imersivos com os melhores profissionais do mercado, palestrantes
+internacionais e uma programação que vai transformar sua visão sobre tecnologia.</p>
+      <div class="hero-buttons">
+        <a href="#cta" class="btn-primary"><i class="fas fa-rocket"></i> Inscreva-se Grátis</a>
+        <a href="#schedule" class="btn-secondary"><i class="fas fa-calendar"></i> Ver
+Cronograma</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <h3 class="counter" data-target="5000">0</h3>
+          <p>Participantes</p>
+        </div>
+        <div class="stat">
+          <h3 class="counter" data-target="30">0</h3>
+          <p>Palestrantes</p>
+        </div>
+        <div class="stat">
+          <h3 class="counter" data-target="15">0</h3>
+          <p>Horas de conteúdo</p>
+        </div>
+        <div class="stat">
+          <h3 class="counter" data-target="3">0</h3>
+          <p>Dias de evento</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="countdown-section">
+    <div class="countdown" id="countdown">
+      <div class="countdown-item reveal">
+        <div class="number" id="days">00</div>
+        <div class="label">Dias</div>
+      </div>
+      <div class="countdown-item reveal">
+        <div class="number" id="hours">00</div>
+        <div class="label">Horas</div>
+      </div>
+      <div class="countdown-item reveal">
+        <div class="number" id="minutes">00</div>
+        <div class="label">Minutos</div>
+      </div>
+      <div class="countdown-item reveal">
+        <div class="number" id="seconds">00</div>
+        <div class="label">Segundos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="section-header reveal">
+      <span class="tag">Sobre o Evento</span>
+      <h2>Uma experiência que vai além da sala de aula</h2>
+      <p>O TechFest 2025 é a maior iniciativa estudantil da universidade, reunindo mentes
+brilhantes de diversas áreas para compartilhar conhecimento.</p>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card reveal">
+        <div class="topic-icon">🚀</div>
+        <h3>Inovação</h3>
+        <p>Descubra as tecnologias que estão moldando o futuro da indústria.</p>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">🎯</div>
+        <h3>Networking</h3>
+        <p>Conecte-se com profissionais e colegas que compartilham seus interesses.</p>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">💡</div>
+        <h3>Aprendizado</h3>
+        <p>Workshops práticos e palestras inspiradoras para todos os níveis.</p>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">🌍</div>
+        <h3>Global</h3>
+        <p>Palestrantes internacionais e conteúdo em português e inglês.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speakers -->
+  <section class="section" id="speakers">
+    <div class="section-header reveal">
+      <span class="tag">Palestrantes</span>
+      <h2>Conheça quem vai inspirar você</h2>
+      <p>Profissionais renomados que estão na vanguarda da tecnologia e inovação.</p>
+    </div>
+    <div class="speakers-grid">
+      <div class="speaker-card reveal">
+        <div class="speaker-avatar">👩‍💻</div>
+        <h3>Dra. Ana Carolina</h3>
+        <p class="role">Head de IA no Google</p>
+        <p class="desc">Especialista em Inteligência Artificial com 15 anos de experiência em
+machine learning e deep learning.</p>
+        <div class="speaker-socials">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="speaker-card reveal">
+        <div class="speaker-avatar">👨‍💻</div>
+        <h3>Prof. Marcos Silva</h3>
+        <p class="role">Fundador da TechStart</p>
+        <p class="desc">Empreendedor serial, já fundou 3 startups que foram vendidas por mais de
+R$ 100 milhões.</p>
+        <div class="speaker-socials">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="speaker-card reveal">
+        <div class="speaker-avatar">👩‍🔬</div>
+        <h3>Dra. Sofia Mendes</h3>
+        <p class="role">CTO da SpaceTech</p>
+        <p class="desc">Engenheira aeroespacial especializada em computação quântica aplicada a
+satélites.</p>
+        <div class="speaker-socials">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-medium"></i></a>
+        </div>
+      </div>
+      <div class="speaker-card reveal">
+        <div class="speaker-avatar">👨‍🏫</div>
+        <h3>Lucas Oliveira</h3>
+        <p class="role">Product Manager no Meta</p>
+        <p class="desc">Responsável por produtos utilizados por mais de 1 bilhão de pessoas no
+mundo.</p>
+        <div class="speaker-socials">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section class="section" id="schedule">
+    <div class="section-header reveal">
+      <span class="tag">Cronograma</span>
+      <h2>A programação completa</h2>
+      <p>Três dias repletos de conteúdo de alta qualidade.</p>
+    </div>
+    <div class="schedule-container">
+      <div class="schedule-day reveal">
+        <h3><i class="fas fa-calendar-day" style="color: var(--primary);"></i> Dia 1 - <span
+class="date">15 de Outubro, 2025</span></h3>
+        <div class="schedule-item">
+          <div class="schedule-time">09:00</div>
+          <div class="schedule-info">
+            <h4>Abertura & Keynote</h4>
+            <p>O futuro da tecnologia com Dra. Ana Carolina</p>
+            <span class="schedule-tag tag-tech">Keynote</span>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">11:00</div>
+          <div class="schedule-info">
+            <h4>Workshop de IA Generativa</h4>
+            <p>Aprenda a criar aplicações com LLMs na prática</p>
+            <span class="schedule-tag tag-workshop">Workshop</span>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">14:00</div>
+          <div class="schedule-info">
+            <h4>Painel: Startups & Inovação</h4>
+            <p>De idea à escala — como fundar e crescer</p>
+            <span class="schedule-tag tag-painel">Painel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-day reveal">
+        <h3><i class="fas fa-calendar-day" style="color: var(--primary);"></i> Dia 2 - <span
+class="date">16 de Outubro, 2025</span></h3>
+        <div class="schedule-item">
+          <div class="schedule-time">09:00</div>
+          <div class="schedule-info">
+            <h4>Computação Quântica Explicada</h4>
+            <p>Dra. Sofia Mendes traz os avanços mais recentes</p>
+            <span class="schedule-tag tag-tech">Palestra</span>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">11:30</div>
+          <div class="schedule-info">
+            <h4>Workshop de Product Design</h4>
+            <p>Lucas Oliveira mostra o processo criativo do Meta</p>
+            <span class="schedule-tag tag-workshop">Workshop</span>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">14:30</div>
+          <div class="schedule-info">
+            <h4>Panela: Carreira em Tech</h4>
+            <p>Dicas práticas para iniciar sua carreira no mercado</p>
+            <span class="schedule-tag tag-painel">Painel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-day reveal">
+        <h3><i class="fas fa-calendar-day" style="color: var(--primary);"></i> Dia 3 - <span
+class="date">17 de Outubro, 2025</span></h3>
+        <div class="schedule-item">
+          <div class="schedule-time">09:00</div>
+          <div class="schedule-info">
+            <h4>Keynote: O Futuro do Trabalho</h4>
+            <p>Prof. Marcos Silva discute IA e emprego</p>
+            <span class="schedule-tag tag-tech">Keynote</span>
+          </div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">11:00</div>
+          <div class="schedule-info">
+            <h4>Hackathon de Encerramento</h4>
+            <p>Competição de 4 horas com prêmios exclusivos</p>
+            <span class="schedule-tag tag-workshop">Hackathon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="section" id="location">
+    <div class="section-header reveal">
+      <span class="tag">Local</span>
+      <h2>Onde vai acontecer</h2>
+      <p>Um espaço moderno e acessível no coração da universidade.</p>
+    </div>
+    <div class="location-wrapper reveal">
+      <div class="location-info">
+        <h3>Centro de Convenções da Universidade</h3>
+        <p>O evento acontece no auditório principal e nas salas adjacentes, com espaço para
+networking e exposição de startups.</p>
+        <ul class="location-details">
+          <li><i class="fas fa-map-marker-alt"></i> Av. da Universidade, 1000 - Centro</li>
+          <li><i class="fas fa-calendar-alt"></i> 15 a 17 de Outubro, 2025</li>
+          <li><i class="fas fa-clock"></i> 09:00 às 18:00</li>
+          <li><i class="fas fa-ticket-alt"></i> Inscrição gratuita com limite de vagas</li>
+          <li><i class="fas fa-parking"></i> Estacionamento gratuito</li>
+        </ul>
+      </div>
+      <div class="location-map">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <p style="color: var(--text-light);">Mapa interativo em breve</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-card reveal">
+      <h2>Garanta sua vaga no TechFest 2025</h2>
+      <p>As vagas são limitadas a 5.000 participantes. Não perca a oportunidade de participar do
+maior evento estudantil do ano.</p>
+      <a href="#" class="btn-primary"><i class="fas fa-bolt"></i> Inscreva-se Agora</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">TechFest 2025</div>
+      <ul class="footer-links">
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#speakers">Palestrantes</a></li>
+        <li><a href="#schedule">Cronograma</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem; color: var(--text-light); font-size:
+0.85rem;">
+      © 2025 TechFest. Desenvolvido com ❤️ para a universidade.
+    </div>
+  </footer>
+
+  <script>
+    // ===== PARTICLES =====
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.width = (Math.random() * 3 + 1) + 'px';
+        particle.style.height = particle.style.width;
+        container.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    // ===== NAVBAR SCROLL =====
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ===== SCROLL REVEAL =====
+    function reveal() {
+      const elements = document.querySelectorAll('.reveal');
+      elements.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          el.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', reveal);
+    reveal(); // Run on load
+
+    // ===== COUNTER ANIMATION =====
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const increment = target / 100;
+        let current = 0;
+
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            counter.textContent = Math.ceil(current).toLocaleString('pt-BR') + '+';
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target.toLocaleString('pt-BR') + '+';
+          }
+        };
+
+        updateCounter();
+      });
+    }
+
+    // Trigger counters when hero is visible
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          heroObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    heroObserver.observe(document.querySelector('.hero'));
+
+    // ===== COUNTDOWN =====
+    function updateCountdown() {
+      const eventDate = new Date('2025-10-15T09:00:00');
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
