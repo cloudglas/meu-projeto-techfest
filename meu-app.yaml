@@ -15,7 +15,7 @@ spec:
       containers:
       - name: app
         image: cloudglas/meu-projeto-meu-site:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
 ---
