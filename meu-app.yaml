@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: meu-app-web
 spec:
-  replicas: 3
+  replicas: 10
   selector:
     matchLabels:
       app: meu-app
@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: app
-        image: meu-projeto-meu-site:latest
-        imagePullPolicy: IfNotPresent
+        image: cloudglas/meu-projeto-meu-site:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 ---
